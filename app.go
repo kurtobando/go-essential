@@ -1,10 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"example.com/go-essential/greetings"
+	"fmt"
+)
 
 func main() {
 	fmt.Println("Running ...")
 
-	sayHelloWorld()
-	sayHelloUser("John Doe")
+	greetings.SayHelloWorld()
+	greetings.SayHelloUser("John Doe")
 }
