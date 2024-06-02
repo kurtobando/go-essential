@@ -6,7 +6,7 @@ import (
 
 func main() {
 	var name string
-	var age string
+	var age int
 	var location string
 
 	// Reads input from the standard input, stops reading at a newline, and discards the remaining characters on the line.
@@ -21,11 +21,11 @@ func main() {
 	// Reads formatted input from the standard input based on a format string.
 	// Useful when you need to read input in a specific format.
 	fmt.Print("What is your age? ")
-	_, err = fmt.Scanf("%s", &age)
+	_, err = fmt.Scanf("%d", &age)
 	if err != nil {
 		return
 	}
-	fmt.Printf("Your age is: %s\n", age)
+	fmt.Printf("Your age is: %d\n", age)
 
 	// Reads input from the standard input and stops reading at whitespace.
 	// Useful for reading space-separated values.
