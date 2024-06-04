@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // create type user
 type user struct {
@@ -20,24 +23,28 @@ func (u *user) setName(name string) {
 }
 
 // convention when creating a struct
-func newUser(name string, age int, location string) *user {
+func newUser(name string, age int, location string) (*user, error) {
+	if name == "" || age == 0 || location == "" {
+		return nil, errors.New("invalid arguments")
+	}
 	return &user{
 		name:     name,
 		age:      age,
 		location: location,
-	}
+	}, nil
 }
 
 func main() {
-	var _user *user = newUser("John Doe", 21, "New York")
-
+	_user, err := newUser("John Doe", 21, "New York")
+	if err != nil {
+		fmt.Println(err)
+	}
 	_user.displayUser()
 	_user.setName("Mary Doe")
 	_user.displayUser()
 
 	// return memory address
 	fmt.Println(&_user)
-
 	// return the value of the memory address
 	fmt.Println(*_user)
 }
