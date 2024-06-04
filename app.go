@@ -10,17 +10,34 @@ type user struct {
 }
 
 // attach a method to user struct
-func (u user) displayUser() {
-	fmt.Println(u.name)
-	fmt.Println(u.age)
-	fmt.Println(u.location)
+func (u *user) displayUser() {
+	fmt.Printf("%s %d %s \n", u.name, u.age, u.location)
+}
+
+// attach a method that will mutate the params
+func (u *user) setName(name string) {
+	u.name = name
+}
+
+// convention when creating a struct
+func newUser(name string, age int, location string) *user {
+	return &user{
+		name:     name,
+		age:      age,
+		location: location,
+	}
 }
 
 func main() {
-	var appUser user = user{
-		name:     "John Doe",
-		age:      21,
-		location: "New York",
-	}
-	appUser.displayUser()
+	var _user *user = newUser("John Doe", 21, "New York")
+
+	_user.displayUser()
+	_user.setName("Mary Doe")
+	_user.displayUser()
+
+	// return memory address
+	fmt.Println(&_user)
+
+	// return the value of the memory address
+	fmt.Println(*_user)
 }
