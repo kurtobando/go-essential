@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"example.com/go-essential/arrays"
+	"example.com/go-essential/maps"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	arrays.StructArray()
+	arrays.TypeAnyArray()
+	arrays.FixedArray()
+	arrays.DynamicArray()
+
+	maps.DynamicMaps()
 }
