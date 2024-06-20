@@ -56,5 +56,7 @@ func (p *Price) GetPricesWithTax() {
 	fmt.Println("***********************")
 	for _, v := range p.PricesWithTax {
 		fmt.Printf("Price %.2f, Tax %.2f, Calculated Tax %.2f\n", v.Price, v.Tax, v.PriceCalculatedTax)
+		_ = filemanager.WriteFile(fmt.Sprintf("tmp/prices-with-tax-%.0f.json", v.Price), p)
 	}
+
 }
