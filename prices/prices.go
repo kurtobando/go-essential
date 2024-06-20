@@ -1,10 +1,9 @@
 package prices
 
 import (
-	"bufio"
+	"example.com/go-essential/filemanager"
+	"example.com/go-essential/helper"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 type Price struct {
@@ -38,42 +37,23 @@ func (p *Price) Process() {
 }
 
 func (p *Price) GetPricesFromAFile() {
-	// open file via os library
-	file, err := os.Open("tmp/prices.txt")
+	readFile, err := filemanager.ReadFile("tmp/prices.txt")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// read file line by line
-	scanner := bufio.NewScanner(file)
-	var scannedLines []string
-	for scanner.Scan() {
-		scannedLines = append(scannedLines, scanner.Text())
-	}
-
-	err = scanner.Err()
+	float, err := helper.StringsToFloat(readFile)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// convert the strings from the file to float
-	var prices []float64
-	for _, line := range scannedLines {
-		p, _ := strconv.ParseFloat(line, 64)
-		prices = append(prices, p)
-	}
-	p.Prices = prices
-
-	err = file.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	p.Prices = float
 }
 
 func (p *Price) GetPricesWithTax() {
+	fmt.Println("***********************")
 	for _, v := range p.PricesWithTax {
 		fmt.Printf("Price %.2f, Tax %.2f, Calculated Tax %.2f\n", v.Price, v.Tax, v.PriceCalculatedTax)
 	}
